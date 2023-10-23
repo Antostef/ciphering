@@ -14,7 +14,7 @@ def time_this(func):
     return wrapper
 
 
-def typeassert(*ty_args, **ty_kwargs):
+def type_assert(*ty_args, **ty_kwargs):
     def decorate(func):
         # Map function argument names to supplied types
         sig = signature(func)
@@ -30,3 +30,24 @@ def typeassert(*ty_args, **ty_kwargs):
             return func(*args, **kwargs)
         return wrapper
     return decorate
+
+
+def inbound_assert(*bo_args, **bo_kwargs):
+    def decorate(func):
+        bounded_args = bo_kwargs.get("params")
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for key, value in bounded_args.items():
+                arg_value = kwargs.get(key)
+
+                if value[0] is not None:
+                    if arg_value < value[0]:
+                        raise ValueError(f"Argument {key} with value {arg_value} is lower than the lowest bound: {value[0]}")
+                if value[1] is not None:
+                    if arg_value > value[1]:
+                        raise ValueError(f"Argument {key} with value {arg_value} is higher than the highest bound: {value[1]}")
+            return func(*args, **kwargs)
+        return wrapper
+    return decorate
+

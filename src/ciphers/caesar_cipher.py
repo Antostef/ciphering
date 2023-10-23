@@ -1,6 +1,7 @@
-from .utils import typeassert
+from .utils import type_assert, inbound_assert
 
-@typeassert(str, int, bool)
+@type_assert(str, int, bool)
+@inbound_assert(params = {"key": (0, None)})
 def caesar_cipher(text_input: str, key: int, mode: bool) -> str:
     """Caesar cipher
 

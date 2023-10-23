@@ -1,6 +1,6 @@
-from .utils import typeassert
+from .utils import type_assert
 
-@typeassert(str)
+@type_assert(str)
 def reverse_cipher(text_input: str) -> str:
     """Reverse Cipher is a cipher that returns a reversed version of the string that was given.
     The simplicity of this cipher means that it can be called to cipher and to decipher any message.
