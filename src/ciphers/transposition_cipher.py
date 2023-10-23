@@ -1,5 +1,7 @@
 import math
+from .utils import typeassert
 
+@typeassert(str, int)
 def transposition_cipher(text_input: str, key: int) -> str:
     """the columnar transposition cipher.
 
@@ -24,7 +26,7 @@ def transposition_cipher(text_input: str, key: int) -> str:
     return result
 
 
-
+@typeassert(str, int)
 def transposition_decipher(text_input: str, key: int) -> str:
     """Columnar transposition decipher.
 

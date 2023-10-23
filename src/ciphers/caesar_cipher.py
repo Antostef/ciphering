@@ -1,4 +1,6 @@
+from .utils import typeassert
 
+@typeassert(str, int, bool)
 def caesar_cipher(text_input: str, key: int, mode: bool) -> str:
     """Caesar cipher
 
